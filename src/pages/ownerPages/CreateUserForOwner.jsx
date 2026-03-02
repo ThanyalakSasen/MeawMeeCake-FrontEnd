@@ -1,10 +1,9 @@
 import { useState, useEffect } from "react";
 import { InputField } from "../../components/inputField";
 import InputDate from "../../components/inputDate";
-import SideBarMenu from "../../components/SideBarMenu";
 import { SelectInput } from "../../components/selectInput";
 import ImageUpload from "../../components/imageUploadComponent";
-import NavBar from "../../components/NavBar";
+import Layout from "../../components/Layout";
 import { Row, Col, Alert, Spinner } from "react-bootstrap";
 import Swal from "sweetalert2";
 import api from "../../service/api";
@@ -262,18 +261,11 @@ const typeEmployeeOptions = [
   };
 
   return (
-    <Row>
-      <Col md={3} className="p-0">
-        <SideBarMenu />
-      </Col>
-
-      <Col md={9} style={{ backgroundColor: "#F0F0FA", minHeight: "100vh" }}>
-        <NavBar titleMain="เพิ่มผู้ใช้ใหม่" />
-
-        <Row className="m-3">
-          <Col md={10} className="w-100">
-            <div className="p-4 bg-white rounded">
-              <form onSubmit={handleSubmit}>
+    <Layout titleMain="เพิ่มผู้ใช้ใหม่">
+      <Row className="m-3">
+        <Col md={10} className="w-100">
+          <div className="p-4 bg-white rounded">
+            <form onSubmit={handleSubmit}>
                 {/* เพิ่ม onChange handler หรือใช้แบบไม่ควบคุม */}
                 <Row className="m-4 align-items-center">
                   <ImageUpload 
@@ -423,11 +415,10 @@ const typeEmployeeOptions = [
                     )}
                   </button>
                 </div>
-              </form>
-            </div>
-          </Col>
-        </Row>
-      </Col>
-    </Row>
+            </form>
+          </div>
+        </Col>
+      </Row>
+    </Layout>
   );
 }

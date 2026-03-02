@@ -1,7 +1,6 @@
 import { useState, useEffect } from "react";
 import { useParams, useNavigate } from "react-router-dom";
 import {
-  Container,
   Row,
   Col,
   Alert,
@@ -11,10 +10,9 @@ import {
 } from "react-bootstrap";
 import { InputField } from "../../components/inputField";
 import InputDate from "../../components/inputDate";
-import SideBarMenu from "../../components/SideBarMenu";
 import { SelectInput } from "../../components/selectInput";
 import ImageUpload from "../../components/imageUploadComponent";
-import NavBar from "../../components/NavBar";
+import Layout from "../../components/Layout";
 import api from "../../service/api";
 
 export default function UpdateInfoEmployeeForOwner() {
@@ -236,17 +234,9 @@ export default function UpdateInfoEmployeeForOwner() {
 
   // ===== UI =====
   return (
-    <Container fluid style={{ minHeight: "100vh", background: "#F0F0FA" }}>
-      <Row className="g-0">
-        <Col md={3}>
-          <SideBarMenu />
-        </Col>
-
-        <Col md={9}>
-          <NavBar titleMain="แก้ไขข้อมูลพนักงาน" />
-
-          <div className="p-4 bg-white rounded m-4">
-            <form onSubmit={handleSubmit}>
+    <Layout titleMain="แก้ไขข้อมูลพนักงาน">
+      <div className="p-4 bg-white rounded m-4">
+        <form onSubmit={handleSubmit}>
               {/* IMAGE */}
               <div className="text-center mb-4">
                 <Image
@@ -357,29 +347,21 @@ export default function UpdateInfoEmployeeForOwner() {
                 </Alert>
               )}
 
-              <div className="text-end mt-4">
-                <Button
-                  variant="secondary"
-                  className="me-2"
-                  type="button"
-                  onClick={() =>
-                    navigate(`/information-profile/${userId}`)
-                  }
-                >
-                  ยกเลิก
-                </Button>
-                <Button
-                  variant="success"
-                  type="submit"
-                  disabled={isLoading}
-                >
-                  {isLoading ? "กำลังบันทึก..." : "บันทึกข้อมูล"}
-                </Button>
-              </div>
-            </form>
+          <div className="text-end mt-4">
+            <Button
+              variant="secondary"
+              className="me-2"
+              type="button"
+              onClick={() => navigate(`/information-profile/${userId}`)}
+            >
+              ยกเลิก
+            </Button>
+            <Button variant="success" type="submit" disabled={isLoading}>
+              {isLoading ? "กำลังบันทึก..." : "บันทึกข้อมูล"}
+            </Button>
           </div>
-        </Col>
-      </Row>
-    </Container>
+        </form>
+      </div>
+    </Layout>
   );
 }

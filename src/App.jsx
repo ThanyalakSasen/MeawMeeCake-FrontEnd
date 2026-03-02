@@ -15,7 +15,8 @@ import EmployeeManage from "./pages/ownerPages/EmployeeManage";
 import ManageDeletedEmployeeList from "./pages/ownerPages/ManageDeletedEmployeeList"
 import CreateUserForOwner from "./pages/ownerPages/CreateUserForOwner";
 import ProductManageForOwner from "./pages/ownerPages/ProductManageForOwner";
-import AddProductForOwner from "./pages/ownerPages/AddProductForOwner";
+import AddProductForOwner from "./pages/ownerPages/addProductForOwner/AddProductForOwner";
+import AddRecipeForOwner from "./pages/ownerPages/addRecipeForOwner/AddRecipeForOwner";
 import ProductDetail from "./pages/ownerPages/ProductDetail";
 import InformationProfile from "./pages/InformationProfile";
 
@@ -122,6 +123,14 @@ function App() {
           </ProtectedRoute>
         }
       /> 
+      <Route
+        path="/add-recipe/:newProductId"
+        element={
+          <ProtectedRoute>
+            <AddRecipeForOwner />
+          </ProtectedRoute>
+        }
+      />
       <Route
         path="/product-detail/:productId"
         element={

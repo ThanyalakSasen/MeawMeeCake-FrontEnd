@@ -1,11 +1,10 @@
 import { useState, useEffect } from "react";
 import Table from "react-bootstrap/Table";
-import { Container, Row, Col, Button, Spinner, Alert } from "react-bootstrap";
+import { Row, Col, Button, Spinner, Alert } from "react-bootstrap";
 import { useNavigate } from "react-router-dom";
-import { FiTrash2, FiEye, FiBarChart } from "react-icons/fi";
+import { FiTrash2, FiEye } from "react-icons/fi";
 import Swal from "sweetalert2";
-import SideBarMenu from "../../components/SideBarMenu";
-import NavBar from "../../components/NavBar";
+import Layout from "../../components/Layout";
 import { InputField } from "../../components/inputField";
 import api from "../../service/api";
 
@@ -98,16 +97,7 @@ export default function EmployeeManage() {
   );
 
   return (
-    <Container fluid className="p-0" style={{ minHeight: "100vh" }}>
-      <Row className="g-0" style={{ minHeight: "100vh" }}>
-        <Col md={3} lg={3} className="bg-white">
-          <SideBarMenu />
-        </Col>
-
-        <Col md={9} lg={9} style={{ backgroundColor: "#F0F0FA" }}>
-          <div className="p-3">
-            <NavBar titleMain="รายชื่อพนักงานที่ถูกลบ" />
-          </div>
+    <Layout titleMain="รายชื่อพนักงานที่ถูกลบ">
 
           <div
             style={{
@@ -206,8 +196,6 @@ export default function EmployeeManage() {
               </tbody>
             </Table>
           </div>
-        </Col>
-      </Row>
-    </Container>
+    </Layout>
   );
 }

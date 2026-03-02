@@ -1,8 +1,7 @@
 import { useEffect, useState } from "react";
 import { useNavigate, useParams } from "react-router-dom";
-import SideBarMenu from "../../components/SideBarMenu";
-import NavBar from "../../components/NavBar";
-import { Row, Col, Container, Card, Button, Spinner, Alert } from "react-bootstrap";
+import Layout from "../../components/Layout";
+import { Row, Col, Card, Button, Spinner, Alert } from "react-bootstrap";
 import api from "../../service/api";
 
 export default function ProductDetail() {
@@ -37,78 +36,63 @@ export default function ProductDetail() {
 	const imageUrl = product?.product_img || "";
 
 	return (
-		<Container fluid className="p-0" style={{ minHeight: "100vh" }}>
-			<Row className="g-0" style={{ minHeight: "100vh" }}>
-				<Col md={3} lg={3} className="bg-white">
-					<SideBarMenu />
-				</Col>
+		<Layout titleMain="รายละเอียดสินค้า">
+			<Row className="px-4 pb-4">
+				<Col>
+					{loading && (
+						<div className="text-center py-4">
+							<Spinner animation="border" role="status">
+								<span className="visually-hidden">Loading...</span>
+							</Spinner>
+						</div>
+					)}
 
-				<Col md={9} lg={9} style={{ backgroundColor: "#F0F0FA" }}>
-					<div className="p-3">
-						<NavBar titleMain="รายละเอียดสินค้า" />
-					</div>
+					{!loading && error && <Alert variant="danger">{error}</Alert>}
 
-					<Row className="px-4 pb-4">
-						<Col>
-							{loading && (
-								<div className="text-center py-4">
-									<Spinner animation="border" role="status">
-										<span className="visually-hidden">Loading...</span>
-									</Spinner>
-								</div>
-							)}
+					{!loading && !error && product && (
+						<Card className="p-3">
+							<Row>
+								<Col md={4} className="mb-3">
+									<Card.Img
+										src={imageUrl || "holder.js/300x300"}
+										alt={product.product_name_th}
+										style={{ objectFit: "cover", width: "100%", height: 300 }}
+									/>
+								</Col>
+								<Col md={8}>
+									<h4 className="mb-2">
+										{product.product_name_th} ({product.product_name_eng})
+									</h4>
+									<p className="mb-1">
+										<strong>ประเภท:</strong> {product.product_type || "-"}
+									</p>
+									<p className="mb-1">
+										<strong>ราคา:</strong> {product.product_price ?? "-"} บาท
+									</p>
+									<p className="mb-1">
+										<strong>คำอธิบาย:</strong> {product.product_description || "-"}
+									</p>
+									<p className="mb-3">
+										<strong>วิธีการเตรียมอุ่น:</strong> {product.preparation_heating || "-"}
+									</p>
 
-							{!loading && error && <Alert variant="danger">{error}</Alert>}
-
-							{!loading && !error && product && (
-								<Card className="p-3">
-									<Row>
-										<Col md={4} className="mb-3">
-											<Card.Img
-												src={imageUrl || "holder.js/300x300"}
-												alt={product.product_name_th}
-												style={{ objectFit: "cover", width: "100%", height: 300 }}
-											/>
-										</Col>
-										<Col md={8}>
-											<h4 className="mb-2">
-												{product.product_name_th} ({product.product_name_eng})
-											</h4>
-											<p className="mb-1">
-												<strong>ประเภท:</strong> {product.product_type || "-"}
-											</p>
-											<p className="mb-1">
-												<strong>ราคา:</strong> {product.product_price ?? "-"} บาท
-											</p>
-											<p className="mb-1">
-												<strong>คำอธิบาย:</strong> {product.product_description || "-"}
-											</p>
-											<p className="mb-3">
-												<strong>วิธีการเตรียมอุ่น:</strong> {product.preparation_heating || "-"}
-											</p>
-
-											<div className="d-flex gap-2">
-												<Button
-													variant="secondary"
-													onClick={() => navigate(-1)}
-												>
-													กลับ
-												</Button>
-												<Button
-													variant="warning"
-													onClick={() => navigate(`/edit-product/${product._id}`)}
-												>
-													แก้ไขสินค้า
-												</Button>
-											</div>
-										</Col>
-									</Row>
-								</Card>
-							)}
-						</Col>
-					</Row>
+									<div className="d-flex gap-2">
+										<Button variant="secondary" onClick={() => navigate(-1)}>
+											กลับ
+										</Button>
+										<Button
+											variant="warning"
+											onClick={() => navigate(`/edit-product/${product._id}`)}
+										>
+											แก้ไขสินค้า
+										</Button>
+									</div>
+								</Col>
+							</Row>
+						</Card>
+					)}
 				</Col>
 			</Row>
-		</Container>
+		</Layout>
 	);
 }

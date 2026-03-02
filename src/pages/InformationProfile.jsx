@@ -7,9 +7,8 @@ import {
   Col,
 } from "react-bootstrap";
 import InformationEmployeeForOwner from "../components/informationEmplyeeForOwner";
-import NavBar from "../components/NavBar";
+import Layout from "../components/Layout";
 import { authAPI } from "../service/authService";
-import SideBarMenu from "../components/SideBarMenu";
 
 export default function Dashboard() {
   const navigate = useNavigate();
@@ -171,23 +170,10 @@ export default function Dashboard() {
   }
 
   return (
-    <Container fluid style={{ minHeight: "100vh", backgroundColor: "#F0F0FA" }}>
+    <Layout>
       <Row>
-        {/* Sidebar */}
-        <Col md={3} className="p-0 bg-white">
-          <SideBarMenu />
-        </Col>
-
-        {/* Main */}
-        <Col md={9} className="p-0">
-          <NavBar />
-          <Row>
-            <Col>
-                {renderDashboardContent()}
-            </Col>
-          </Row>
-        </Col>
+        <Col>{renderDashboardContent()}</Col>
       </Row>
-    </Container>
+    </Layout>
   );
 }

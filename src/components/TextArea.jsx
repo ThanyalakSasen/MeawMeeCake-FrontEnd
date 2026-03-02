@@ -1,21 +1,23 @@
 import Form from "react-bootstrap/Form";
 
-export const InputField = ({
+export const TextArea = ({
   label,
   placeholder,
-  type = "text",
   value,
   onChange,
   required = false,
   maxLength,
   pattern,
   name,
+  rows = 4,
 }) => {
   return (
-    <Form.Group className={`${label ? "mb-3" : ""} w-100`} controlId={name}>
+    <Form.Group className="mb-3 w-100" controlId={name}>
       {label && <Form.Label>{label}</Form.Label>}
       <Form.Control
-        type={type}
+        as="textarea"
+        rows={rows}
+        style={{ resize: "none" }}
         placeholder={placeholder}
         value={value}
         onChange={onChange}

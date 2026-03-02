@@ -1,13 +1,11 @@
 import { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
-import SideBarMenu from "../../components/SideBarMenu";
-import NavBar from "../../components/NavBar";
+import Layout from "../../components/Layout";
 import { InputField } from "../../components/inputField";
 import { FiTrash2, FiEye } from "react-icons/fi";
 import {
   Row,
   Col,
-  Container,
   Button,
   Card,
   Spinner,
@@ -70,24 +68,15 @@ export default function ProductManageForOwner() {
   });
 
   return (
-    <Container fluid className="p-0" style={{ minHeight: "100vh" }}>
-      <Row className="g-0" style={{ minHeight: "100vh" }}>
-        <Col md={3} lg={3} className="bg-white">
-          <SideBarMenu />
-        </Col>
-
-        <Col md={9} lg={9} style={{ backgroundColor: "#F0F0FA" }}>
-          <div className="p-3">
-            <NavBar titleMain="จัดการสินค้า" />
-          </div>
-          <div
-            style={{
-              backgroundColor: "#fff",
-              padding: "2%",
-              borderRadius: "10px",
-              margin: "0% 4%",
-            }}
-          >
+    <Layout titleMain="จัดการสินค้า">
+      <div
+        style={{
+          backgroundColor: "#fff",
+          padding: "2%",
+          borderRadius: "10px",
+          margin: "0% 4%",
+        }}
+      >
             <Row className="align-items-center p-0 w-80">
               <Col md={6}>
                 <form
@@ -118,79 +107,74 @@ export default function ProductManageForOwner() {
                 </Button>
               </Col>
             </Row>
-          </div>
-          <div
-            style={{
-              borderRadius: "10px",
-              margin: "2% 4%",
-            }}
-          >
-            <Row>
-              {loading && (
-                <Col className="py-4 text-center">
-                  <Spinner animation="border" role="status">
-                    <span className="visually-hidden">Loading...</span>
-                  </Spinner>
-                </Col>
-              )}
+      </div>
+      <div
+        style={{
+          borderRadius: "10px",
+          margin: "2% 4%",
+        }}
+      >
+        <Row>
+          {loading && (
+            <Col className="py-4 text-center">
+              <Spinner animation="border" role="status">
+                <span className="visually-hidden">Loading...</span>
+              </Spinner>
+            </Col>
+          )}
 
-              {!loading && error && (
-                <Col>
-                  <Alert variant="danger">{error}</Alert>
-                </Col>
-              )}
+          {!loading && error && (
+            <Col>
+              <Alert variant="danger">{error}</Alert>
+            </Col>
+          )}
 
-              {!loading && !error && filteredProducts.length === 0 && (
-                <Col>
-                  <Alert variant="info">ไม่พบสินค้า</Alert>
-                </Col>
-              )}
+          {!loading && !error && filteredProducts.length === 0 && (
+            <Col>
+              <Alert variant="info">ไม่พบสินค้า</Alert>
+            </Col>
+          )}
 
-              <Row>
-                {!loading &&
-                  !error &&
-                  filteredProducts.length > 0 &&
-                  filteredProducts.map((product) => (
-                    <Col key={product._id} md={4} className="mb-3">
-                      <Card>
-                        <Card.Img
-                          variant="top"
-                          src={product.product_img || "holder.js/100px180"}
-                        />
-                        <Card.Body>
-                          <Card.Title>{product.product_name_th}</Card.Title>
-                          <Card.Text>
-                            ประเภท: {product.product_name_eng || "-"}
-                          </Card.Text>
-                          <Card.Text>
-                            {product.product_price || "-"} บาท
-                          </Card.Text>
-                          <Row>
-                            <Col md={7} className="mb-1">
-                              <Button
-                                variant="warning"
-                                className="me-2"
-                                onClick={() => navigate(`/product-detail/${product._id}`)}
-                              >
-                                <FiEye style={{ marginRight: 6 }} />{" "}
-                                ดูรายละเอียด
-                              </Button>
-                            </Col>
-                            <Col md={4} className="mb-1">
-                              <Button variant="danger">
-                                <FiTrash2 style={{ marginRight: 6 }} /> ลบ
-                              </Button>
-                            </Col>
-                          </Row>
-                        </Card.Body>
-                      </Card>
-                    </Col>
-                  ))}
-              </Row>
-            </Row>
-          </div>
-        </Col>
-      </Row>
-    </Container>
+          <Row>
+            {!loading &&
+              !error &&
+              filteredProducts.length > 0 &&
+              filteredProducts.map((product) => (
+                <Col key={product._id} md={4} className="mb-3">
+                  <Card>
+                    <Card.Img
+                      variant="top"
+                      src={product.product_img || "holder.js/100px180"}
+                    />
+                    <Card.Body>
+                      <Card.Title>{product.product_name_th}</Card.Title>
+                      <Card.Text>
+                        ประเภท: {product.product_name_eng || "-"}
+                      </Card.Text>
+                      <Card.Text>{product.product_price || "-"} บาท</Card.Text>
+                      <Row>
+                        <Col md={7} className="mb-1">
+                          <Button
+                            variant="warning"
+                            className="me-2"
+                            onClick={() => navigate(`/product-detail/${product._id}`)}
+                          >
+                            <FiEye style={{ marginRight: 6 }} /> ดูรายละเอียด
+                          </Button>
+                        </Col>
+                        <Col md={4} className="mb-1">
+                          <Button variant="danger">
+                            <FiTrash2 style={{ marginRight: 6 }} /> ลบ
+                          </Button>
+                        </Col>
+                      </Row>
+                    </Card.Body>
+                  </Card>
+                </Col>
+              ))}
+          </Row>
+        </Row>
+      </div>
+    </Layout>
   );
 }
