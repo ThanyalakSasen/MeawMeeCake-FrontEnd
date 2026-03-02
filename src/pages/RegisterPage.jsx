@@ -1,7 +1,7 @@
 import { useState, useEffect } from "react";
 import { useLocation, useNavigate } from "react-router-dom";
 import authAPI from "../service/authService";
-import api from "../service/api"; 
+import api from "../service/api";
 import { InputField } from "../components/inputField";
 import InputDate from "../components/inputDate";
 import { SelectInput } from "../components/selectInput";
@@ -9,6 +9,7 @@ import ButtonSubmit from "../components/button";
 import axios from "axios";
 import { Col, Container, Row, Form } from "react-bootstrap";
 import loginPicture from "../assets/pictures/LoginRegisterPicture.png";
+import AddressSearch from "../components/AddressSearch";
 
 export default function Register() {
   const navigate = useNavigate();
@@ -162,6 +163,12 @@ export default function Register() {
                   </p>
                 </>
               ) : null}
+              <AddressSearch
+                label="ที่อยู่สำหรับจัดส่งสินค้า"
+                name="address"
+                placeholder="ค้นหาตำบล อำเภอ จังหวัด รหัสไปรษณีย์"
+                required={false}
+              />
               <Row>
                 <Col md={6}>
                   <InputDate
