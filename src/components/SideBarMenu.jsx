@@ -15,7 +15,6 @@ function SideBarMenu() {
   const toggleMenu = (index) =>
     setOpenIndex(openIndex === index ? null : index);
 
-
   const ListSideBarMenu = [
     {
       name: "รายงานยอดขาย/การวิเคราะห์ความคิดเห็น",
@@ -85,47 +84,42 @@ function SideBarMenu() {
   }, []);
 
   const MenuContent = () => (
-  <Nav className="flex-column sidebar-menu">
-    {ListSideBarMenu.map((item, index) => {
-      const isOpen = openIndex === index;
+    <Nav className="flex-column sidebar-menu">
+      {ListSideBarMenu.map((item, index) => {
+        const isOpen = openIndex === index;
 
-      return (
-        <div key={index} className="sidebar-item">
-          <div
-            className={`sidebar-item-header ${isOpen ? "active" : ""}`}
-            onClick={() => item.subMenu && toggleMenu(index)}
-          >
-            <span className="sidebar-item-title">
-              {item.name}
-            </span>
+        return (
+          <div key={index} className="sidebar-item">
+            <div
+              className={`sidebar-item-header ${isOpen ? "active" : ""}`}
+              onClick={() => item.subMenu && toggleMenu(index)}
+            >
+              <span className="sidebar-item-title">{item.name}</span>
 
-            {item.subMenu && (
-              <span className={`chevron ${isOpen ? "rotate" : ""}`}>
-                ▾
-              </span>
+              {item.subMenu && (
+                <span className={`chevron ${isOpen ? "rotate" : ""}`}>▾</span>
+              )}
+            </div>
+
+            {item.subMenu && isOpen && (
+              <div className="sidebar-submenu">
+                {item.subMenu.map((sub, i) => (
+                  <Nav.Link
+                    key={i}
+                    href={sub.link}
+                    className="sidebar-submenu-item"
+                    onClick={() => setShow(false)}
+                  >
+                    {sub.name}
+                  </Nav.Link>
+                ))}
+              </div>
             )}
           </div>
-
-          {item.subMenu && isOpen && (
-            <div className="sidebar-submenu">
-              {item.subMenu.map((sub, i) => (
-                <Nav.Link
-                  key={i}
-                  href={sub.link}
-                  className="sidebar-submenu-item"
-                  onClick={() => setShow(false)}
-                >
-                  {sub.name}
-                </Nav.Link>
-              ))}
-            </div>
-          )}
-        </div>
-      );
-    })}
-  </Nav>
-);
-
+        );
+      })}
+    </Nav>
+  );
 
   return (
     <>
@@ -146,7 +140,7 @@ function SideBarMenu() {
           <Offcanvas.Title>Menu</Offcanvas.Title>
         </Offcanvas.Header>
         <Offcanvas.Body>
-          <MenuContent/>
+          <MenuContent />
         </Offcanvas.Body>
       </Offcanvas>
 
@@ -163,7 +157,7 @@ function SideBarMenu() {
               margin: "0 auto 20px",
             }}
           />
-          <MenuContent/>
+          <MenuContent />
         </div>
       )}
     </>
