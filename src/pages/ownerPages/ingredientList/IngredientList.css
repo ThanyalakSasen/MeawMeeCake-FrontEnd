@@ -1,0 +1,57 @@
+.ingredient-list-panel {
+  background: #ffffff;
+  border: 1px solid #eef2f7;
+  box-shadow: 0 8px 24px rgba(10, 35, 66, 0.06);
+}
+
+.ingredient-stat-card {
+  background: linear-gradient(180deg, #f9fbff 0%, #ffffff 100%);
+}
+
+.ingredient-table thead th {
+  background-color: #f6f8fb;
+  border-bottom: 1px solid #e4e9f2;
+  color: #4a5568;
+  font-size: 0.9rem;
+  font-weight: 600;
+  white-space: nowrap;
+}
+
+.ingredient-table tbody td {
+  border-bottom: 1px solid #f1f4f8;
+  white-space: nowrap;
+}
+
+.ingredient-actions {
+  display: inline-flex;
+  align-items: center;
+  gap: 1rem;
+}
+
+.ingredient-action-btn {
+  width: 30px;
+  height: 30px;
+  border-radius: 6px;
+  border: 1px solid #d9e0ea;
+  background: #ffffff;
+  color: #2f3b4e;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+}
+
+.ingredient-action-btn:hover {
+  background: #f6f8fb;
+}
+
+.ingredient-action-btn-danger {
+  color: #c62828;
+  border-color: #f0c7c7;
+}
+
+@media (max-width: 767px) {
+  .ingredient-list-panel {
+    padding: 1rem;
+  }
+}

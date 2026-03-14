@@ -1,9 +1,9 @@
-import { Routes, Route, Navigate } from 'react-router-dom';
-import Login from './pages/LoginPage';
+import { Routes, Route, Navigate } from "react-router-dom";
+import Login from "./pages/LoginPage";
 import Register from "./pages/RegisterPage";
 import VerifyEmailPage from "./pages/VerifyEmailPage";
 import Dashboard from "./pages/DashboardPage";
-import ProtectedRoute from './components/ProtectedRoute';
+import ProtectedRoute from "./components/ProtectedRoute";
 import "react-datepicker/dist/react-datepicker.css";
 import AuthCallback from "./pages/AuthCallback";
 import ForgotPasswordPage from "./pages/ForgotPasswordPage";
@@ -12,11 +12,12 @@ import CompleteProfile from "./pages/CompleteProfile";
 import UpdateProfile from "./pages/UpdatePage";
 import EditInfoEmployeeForOwner from "./pages/ownerPages/EditInfoEmployeeForOwner";
 import EmployeeManage from "./pages/ownerPages/EmployeeManage";
-import ManageDeletedEmployeeList from "./pages/ownerPages/ManageDeletedEmployeeList"
+import ManageDeletedEmployeeList from "./pages/ownerPages/ManageDeletedEmployeeList";
 import CreateUserForOwner from "./pages/ownerPages/CreateUserForOwner";
 import ProductManageForOwner from "./pages/ownerPages/ProductManageForOwner";
 import AddProductForOwner from "./pages/ownerPages/addProductForOwner/AddProductForOwner";
 import AddRecipeForOwner from "./pages/ownerPages/addRecipeForOwner/AddRecipeForOwner";
+import IngredientList from "./pages/ownerPages/ingredientList/IngredientList";
 import ProductDetail from "./pages/ownerPages/ProductDetail";
 import InformationProfile from "./pages/InformationProfile";
 
@@ -33,10 +34,10 @@ function App() {
       <Route path="/verify-email/:token" element={<VerifyEmailPage />} />
       <Route path="/forgot-password" element={<ForgotPasswordPage />} />
       <Route path="/reset-password/:token" element={<ResetPasswordPage />} />
-      
+
       {/* Google OAuth Callback */}
       <Route path="/auth/callback" element={<AuthCallback />} />
-      
+
       {/* Complete Profile (Protected - ต้องมี token) */}
       <Route
         path="/complete-profile"
@@ -46,11 +47,14 @@ function App() {
           </ProtectedRoute>
         }
       />
-      <Route path="/update" element={
-        <ProtectedRoute allowIncomplete>
+      <Route
+        path="/update"
+        element={
+          <ProtectedRoute allowIncomplete>
             <UpdateProfile />
-        </ProtectedRoute>
-} />
+          </ProtectedRoute>
+        }
+      />
 
       {/* Dashboard (Protected - ต้อง profileCompleted: true) */}
       <Route
@@ -99,7 +103,9 @@ function App() {
           </ProtectedRoute>
         }
       />
-      <Route path="/information-profile/:userId" element={
+      <Route
+        path="/information-profile/:userId"
+        element={
           <ProtectedRoute>
             <InformationProfile />
           </ProtectedRoute>
@@ -122,12 +128,20 @@ function App() {
             <AddProductForOwner />
           </ProtectedRoute>
         }
-      /> 
+      />
       <Route
         path="/add-recipe/:newProductId"
         element={
           <ProtectedRoute>
             <AddRecipeForOwner />
+          </ProtectedRoute>
+        }
+      />
+      <Route
+        path="/ingredient-list"
+        element={
+          <ProtectedRoute>
+            <IngredientList />
           </ProtectedRoute>
         }
       />
@@ -139,7 +153,6 @@ function App() {
           </ProtectedRoute>
         }
       />
-
 
       {/* กัน path แปลก ๆ */}
       <Route path="*" element={<Navigate to="/login" replace />} />
